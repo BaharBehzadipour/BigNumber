@@ -14,14 +14,14 @@ BigNumber::BigNumber(const long & intNum ){
     numOfDigits = 0;
     while ( temp1 > 0 ){
         ++numOfDigits;
-        temp1 / 10;
+        temp1 /= 10;
     }
 
     numArray = new int8_t[numOfDigits];
     long temp2 = abs(intNum);
     for( size_t i{0}; i < numOfDigits; ++i ){
         numArray[i] = temp2 % 10;
-        temp2 / 10;
+        temp2 /= 10;
     }
 }
 
@@ -42,7 +42,7 @@ BigNumber::~BigNumber(){
 unsigned BigNumber::numOfTrimCharsOnLeft(const std::string &str) {
     unsigned numOfChars = 0;
     size_t i = 0;
-    while( str[i] == '0' || str[i] == '-' || str[i] == '+'){
+    while( i < str.size() - 1 && str[i] == '0' || str[i] == '-' || str[i] == '+'){
         ++numOfChars;
         ++i;
     }
@@ -78,5 +78,23 @@ bool BigNumber::validate(const std::string &str, const std::string &pattern) {
     regex regPattern(pattern);
     return regex_match(str, regPattern);
 }
+
+std::ostream & operator<<( std::ostream & output, const BigNumber & myBig ){
+    if( myBig.sign == false ){
+        output << '-';
+    }
+    for( int i = myBig.numOfDigits - 1; i >= 0; --i){
+        output << (int8_t)(myBig.numArray[i] + 48);
+    }
+    return output;
+}
+
+std::istream &operator>>(std::istream &input, BigNumber &myBig) {
+    string str;
+    input >> str;
+    myBig.setValues(str);
+    return input;
+}
+
 
 
