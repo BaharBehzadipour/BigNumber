@@ -30,6 +30,7 @@ public:
     BigNumber operator-() const;
     int operator[](size_t index) const;
     bool operator==( const BigNumber & ) const;
+    bool operator!=( const BigNumber & ) const;
 };
 
 

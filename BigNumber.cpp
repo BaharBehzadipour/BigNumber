@@ -152,6 +152,10 @@ bool BigNumber:: operator==( const BigNumber & myBig) const{
     return true;
 }
 
+bool BigNumber::operator!=(const BigNumber & myBig) const {
+    return !(*this == myBig);
+}
+
 
 
 

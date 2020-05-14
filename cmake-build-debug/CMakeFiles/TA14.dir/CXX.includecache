@@ -20,3 +20,11 @@ string
 regex
 -
 
+/cygdrive/c/Users/User/CLionProjects/TA14/main.cpp
+iostream
+-
+cstdint
+-
+BigNumber.h
+/cygdrive/c/Users/User/CLionProjects/TA14/BigNumber.h
+
