@@ -63,7 +63,9 @@ void BigNumber:: setValues( const std::string & str ){
     for(size_t i{0}; i < numOfDigits; ++i ){
         numArray[i] = str[str.size() - 1 - i] - 48;
     }
-
+    if( numOfDigits == 1 && numArray[0] == 0){
+        sign = true;
+    }
 }
 
 bool BigNumber::getSign() const {
@@ -133,6 +135,21 @@ int BigNumber::operator[](size_t index) const{
         throw out_of_range("The index is out of range.");
     }
     return numArray[index];
+}
+
+bool BigNumber:: operator==( const BigNumber & myBig) const{
+    if(sign != myBig.sign){
+        return false;
+    }
+    if(numOfDigits != myBig.numOfDigits){
+        return false;
+    }
+    for( size_t i{0}; i < numOfDigits; ++i){
+        if( (*this)[i] != myBig[i] ){
+            return false;
+        }
+    }
+    return true;
 }
 
 
