@@ -2,15 +2,26 @@
 #define TA14_BIGNUMBER_H
 
 #include <cstdint>
+#include <string>
+#include <regex>
 
 class BigNumber {
 private:
     bool sign;
-    int8_t * numArray;
+    int8_t * numArray = nullptr;
     unsigned numOfDigits;
 
-public:
+    bool validate( const std::string & str, const std::string & pattern);
+    unsigned numOfTrimCharsOnLeft( const std::string & str );
 
+public:
+    BigNumber( const std::string & str );
+    BigNumber(const long & intNum );
+    BigNumber ( BigNumber & myBig );
+    ~BigNumber();
+    void setValues( const std::string & str );
+    bool getSign() const;
+    unsigned int getNumOfDigits() const;
 
 };
 
