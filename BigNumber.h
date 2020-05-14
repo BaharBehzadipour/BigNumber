@@ -15,6 +15,7 @@ private:
 
     bool validate( const std::string & str, const std::string & pattern);
     unsigned numOfTrimCharsOnLeft( const std::string & str );
+    BigNumber(){}
 
 public:
     BigNumber( const std::string & str );
@@ -25,6 +26,7 @@ public:
     bool getSign() const;
     unsigned int getNumOfDigits() const;
     BigNumber & operator=(const BigNumber & rightNum);
+    BigNumber operator-();
 
 };
 

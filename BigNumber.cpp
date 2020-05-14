@@ -110,5 +110,16 @@ BigNumber & BigNumber:: operator=(const BigNumber & rightNum){
     return *this;
 }
 
+BigNumber BigNumber:: operator-(){
+    BigNumber temp;
+    temp.sign = !sign;
+    temp.numOfDigits = numOfDigits;
+    temp.numArray = new int8_t[numOfDigits];
+    for( size_t i{0}; i < numOfDigits; ++i){
+        temp.numArray[i] = numArray[i];
+    }
+    return temp;
+}
+
 
 
