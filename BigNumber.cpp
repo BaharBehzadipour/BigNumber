@@ -110,7 +110,7 @@ BigNumber & BigNumber:: operator=(const BigNumber & rightNum){
     return *this;
 }
 
-BigNumber BigNumber:: operator-(){
+BigNumber BigNumber:: operator-() const{
     BigNumber temp;
     temp.sign = !sign;
     temp.numOfDigits = numOfDigits;
@@ -120,6 +120,22 @@ BigNumber BigNumber:: operator-(){
     }
     return temp;
 }
+
+int8_t & BigNumber::operator[](size_t index){
+    if( index < 0 || index >= numOfDigits){
+        throw out_of_range("The index is out of range.");
+    }
+    return numArray[index];
+}
+
+int BigNumber::operator[](size_t index) const{
+    if( index < 0 || index >= numOfDigits){
+        throw out_of_range("The index is out of range.");
+    }
+    return numArray[index];
+}
+
+
 
 
 
