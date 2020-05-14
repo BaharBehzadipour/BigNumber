@@ -24,6 +24,7 @@ public:
     void setValues( const std::string & str );
     bool getSign() const;
     unsigned int getNumOfDigits() const;
+    BigNumber & operator=(const BigNumber & rightNum);
 
 };
 

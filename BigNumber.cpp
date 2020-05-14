@@ -96,5 +96,19 @@ std::istream &operator>>(std::istream &input, BigNumber &myBig) {
     return input;
 }
 
+BigNumber & BigNumber:: operator=(const BigNumber & rightNum){
+    // x = y;
+    if ( &rightNum != this ){
+        sign = rightNum.sign;
+        numOfDigits = rightNum.numOfDigits;
+        delete [] numArray;
+        numArray = new int8_t[numOfDigits];
+        for(size_t i{0}; i < numOfDigits; ++i){
+            numArray[i] = rightNum.numArray[i];
+        }
+    }
+    return *this;
+}
+
 
 
