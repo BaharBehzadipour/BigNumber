@@ -17,16 +17,20 @@ private:
     unsigned numOfTrimCharsOnLeft( const std::string & str );
     BigNumber(){}
     int8_t& operator[](size_t index);
+    static BigNumber unsignedMax( const BigNumber& num1, const BigNumber& num2);
+    static BigNumber unsignedMin( const BigNumber& num1, const BigNumber& num2);
 
 public:
     BigNumber( const std::string & str );
     BigNumber(const long & intNum );
-    BigNumber ( BigNumber & myBig );
+    BigNumber ( BigNumber & myBig );   // copy constructor
+    BigNumber ( BigNumber && myBig ) noexcept;  // move constructor
     ~BigNumber();
     void setValues( const std::string & str );
     bool getSign() const;
     unsigned int getNumOfDigits() const;
     BigNumber & operator=(const BigNumber & rightNum);
+    BigNumber & operator=(BigNumber && rightNum);   // move assignment overloading
     BigNumber operator-() const;
     int operator[](size_t index) const;
     bool operator==( const BigNumber & ) const;
