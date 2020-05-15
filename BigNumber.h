@@ -22,6 +22,7 @@ private:
 
 public:
     BigNumber( const std::string & str );
+    BigNumber( const char * myCharArray ) : BigNumber((std::string) myCharArray) {}
     BigNumber(const long & intNum );
     BigNumber ( BigNumber & myBig );   // copy constructor
     BigNumber ( BigNumber && myBig ) noexcept;  // move constructor
@@ -30,7 +31,7 @@ public:
     bool getSign() const;
     unsigned int getNumOfDigits() const;
     BigNumber & operator=(const BigNumber & rightNum);
-    BigNumber & operator=(BigNumber && rightNum);   // move assignment overloading
+    BigNumber & operator=(BigNumber && rightNum) noexcept ;   // move assignment overloading
     BigNumber operator-() const;
     int operator[](size_t index) const;
     bool operator==( const BigNumber & ) const;

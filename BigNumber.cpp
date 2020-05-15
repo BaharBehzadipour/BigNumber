@@ -156,11 +156,11 @@ bool BigNumber::operator!=(const BigNumber & myBig) const {
     return !(*this == myBig);
 }
 
-BigNumber BigNumber::unsignedMax(const BigNumber &num1, const BigNumber &num2) {
-    if( num1.numOfDigits > num2.numOfDigits){
-        return num1;
-    }
-}
+//BigNumber BigNumber::unsignedMax(const BigNumber &num1, const BigNumber &num2) {
+//    if( num1.numOfDigits > num2.numOfDigits){
+//        return num1;
+//    }
+//}
 
 BigNumber::BigNumber ( BigNumber && myBig ) noexcept
     :sign{myBig.sign}, numOfDigits{myBig.numOfDigits}, numArray{myBig.numArray}
@@ -168,7 +168,7 @@ BigNumber::BigNumber ( BigNumber && myBig ) noexcept
     myBig.numArray = nullptr;
 }
 
-BigNumber & BigNumber:: operator=( BigNumber && rightNum){
+BigNumber & BigNumber:: operator=( BigNumber && rightNum) noexcept {
     if( &rightNum != this ){
         sign = rightNum.sign;
         numOfDigits = rightNum.numOfDigits;
