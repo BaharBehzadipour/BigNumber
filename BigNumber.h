@@ -27,6 +27,8 @@ public:
     static BigNumber unsignedMin( const BigNumber& num1, const BigNumber& num2);
     static bool unsignedGreaterOrEqual( const BigNumber& num1, const BigNumber& num2);
     static bool unsignedLessOrEqual( const BigNumber& num1, const BigNumber& num2);
+    static BigNumber unsignedAdd( const BigNumber& num1, const BigNumber& num2 );
+    static BigNumber unsignedSubtract( const BigNumber& num1, const BigNumber& num2 );
 
     // end of private list
 
@@ -49,6 +51,7 @@ public:
     bool operator<=( const BigNumber & myBig) const;
     bool operator>( const BigNumber & myBig) const;
     bool operator<( const BigNumber & myBig) const;
+    BigNumber absoluteValue() const;
 };
 
 

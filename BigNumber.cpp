@@ -1,5 +1,6 @@
 #include "BigNumber.h"
 #include <stdexcept>
+#include <iostream>
 
 using namespace std;
 
@@ -224,7 +225,7 @@ bool BigNumber:: unsignedLessOrEqual( const BigNumber& num1, const BigNumber& nu
 }
 
 bool BigNumber:: operator>=( const BigNumber & myBig) const{
-    if( sign == true && myBig.sign == false){
+    if( sign && !(myBig.sign)){
         return true;
     }
 
@@ -265,4 +266,52 @@ bool BigNumber:: operator>( const BigNumber & myBig) const{
 
 bool BigNumber:: operator<( const BigNumber & myBig) const{
     return !(*this >= myBig);
+}
+
+BigNumber BigNumber:: absoluteValue() const{
+    BigNumber temp;
+    temp.sign = true;
+    temp.numOfDigits = numOfDigits;
+    temp.numArray = new int8_t[numOfDigits];
+    for( size_t i{0}; i < numOfDigits; ++i){
+        temp.numArray[i] = numArray[i];
+    }
+    return temp;
+}
+
+BigNumber BigNumber:: unsignedAdd( const BigNumber& num1, const BigNumber& num2 ){
+    BigNumber bMax = unsignedMax( num1, num2 );
+    BigNumber bMin = unsignedMin( num1, num2 );
+
+    BigNumber sum;
+
+    sum.sign = true;
+    sum.numOfDigits = bMax.numOfDigits + 1;
+    sum.numArray = new int8_t[sum.numOfDigits];
+    size_t i{0};
+    int8_t carry = 0;
+    int8_t s;
+
+    for(; i < bMin.numOfDigits; ++i){
+        s = bMax[i] + bMin[i] + carry;
+        sum[i] = s % 10;
+        carry = s / 10;
+    }
+
+    for(; i < bMax.numOfDigits; ++i){
+        s = bMax[i] + carry;
+        sum[i] = s % 10;
+        carry = s / 10;
+    }
+
+    if( carry == 1){
+        sum[i] = 1;
+    }
+    else if( carry == 0 ){
+        //sum[i] = 0;
+        sum.numOfDigits -= 1;
+
+    }
+
+    return sum;
 }
