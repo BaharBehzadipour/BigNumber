@@ -25,6 +25,8 @@ public:
     //must be private
     static BigNumber unsignedMax( const BigNumber& num1, const BigNumber& num2);
     static BigNumber unsignedMin( const BigNumber& num1, const BigNumber& num2);
+    static bool unsignedGreaterOrEqual( const BigNumber& num1, const BigNumber& num2);
+    static bool unsignedLessOrEqual( const BigNumber& num1, const BigNumber& num2);
 
     // end of private list
 
@@ -41,8 +43,12 @@ public:
     BigNumber & operator=(BigNumber && rightNum) noexcept ;   // move assignment overloading
     BigNumber operator-() const;
     int operator[](size_t index) const;
-    bool operator==( const BigNumber & ) const;
-    bool operator!=( const BigNumber & ) const;
+    bool operator==( const BigNumber & myBig) const;
+    bool operator!=( const BigNumber & myBig) const;
+    bool operator>=( const BigNumber & myBig) const;
+    bool operator<=( const BigNumber & myBig) const;
+    bool operator>( const BigNumber & myBig) const;
+    bool operator<( const BigNumber & myBig) const;
 };
 
 

@@ -215,4 +215,54 @@ BigNumber BigNumber::unsignedMin(const BigNumber &num1, const BigNumber &num2) {
     }
 }
 
+bool BigNumber::unsignedGreaterOrEqual(const BigNumber &num1, const BigNumber &num2) {
+    return ( unsignedMax(num1, num2) == num1 );
+}
 
+bool BigNumber:: unsignedLessOrEqual( const BigNumber& num1, const BigNumber& num2){
+    return ( unsignedMin(num2, num1) == num1 );
+}
+
+bool BigNumber:: operator>=( const BigNumber & myBig) const{
+    if( sign == true && myBig.sign == false){
+        return true;
+    }
+
+    if( sign == false && myBig.sign == true){
+        return false;
+    }
+
+    if( sign == true && myBig.sign == true){
+        return unsignedGreaterOrEqual(*this, myBig);
+    }
+
+    if( sign == false && myBig.sign == false){
+        return unsignedLessOrEqual(*this, myBig);
+    }
+}
+
+bool BigNumber:: operator<=( const BigNumber & myBig) const{
+    if( sign == true && myBig.sign == false){
+        return false;
+    }
+
+    if( sign == false && myBig.sign == true){
+        return true;
+    }
+
+    if( sign == true && myBig.sign == true){
+        return unsignedLessOrEqual(*this, myBig);
+    }
+
+    if( sign == false && myBig.sign == false){
+        return unsignedGreaterOrEqual(*this, myBig);
+    }
+}
+
+bool BigNumber:: operator>( const BigNumber & myBig) const{
+    return !(*this <= myBig);
+}
+
+bool BigNumber:: operator<( const BigNumber & myBig) const{
+    return !(*this >= myBig);
+}
