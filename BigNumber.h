@@ -17,14 +17,21 @@ private:
     unsigned numOfTrimCharsOnLeft( const std::string & str );
     BigNumber(){}
     int8_t& operator[](size_t index);
+
+
+    //max(a, b)    a.max(b)
+
+public:
+    //must be private
     static BigNumber unsignedMax( const BigNumber& num1, const BigNumber& num2);
     static BigNumber unsignedMin( const BigNumber& num1, const BigNumber& num2);
 
-public:
+    // end of private list
+
     BigNumber( const std::string & str );
     BigNumber( const char * myCharArray ) : BigNumber((std::string) myCharArray) {}
     BigNumber(const long & intNum );
-    BigNumber ( BigNumber & myBig );   // copy constructor
+    BigNumber ( const BigNumber & myBig );   // copy constructor
     BigNumber ( BigNumber && myBig ) noexcept;  // move constructor
     ~BigNumber();
     void setValues( const std::string & str );

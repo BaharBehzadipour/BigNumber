@@ -25,7 +25,7 @@ BigNumber::BigNumber(const long & intNum ){
     }
 }
 
-BigNumber::BigNumber ( BigNumber & myBig ){
+BigNumber::BigNumber ( const BigNumber & myBig ){
     sign = myBig.sign;
     numOfDigits = myBig.numOfDigits;
     numArray = new int8_t[numOfDigits];
@@ -156,12 +156,6 @@ bool BigNumber::operator!=(const BigNumber & myBig) const {
     return !(*this == myBig);
 }
 
-//BigNumber BigNumber::unsignedMax(const BigNumber &num1, const BigNumber &num2) {
-//    if( num1.numOfDigits > num2.numOfDigits){
-//        return num1;
-//    }
-//}
-
 BigNumber::BigNumber ( BigNumber && myBig ) noexcept
     :sign{myBig.sign}, numOfDigits{myBig.numOfDigits}, numArray{myBig.numArray}
 {
@@ -179,7 +173,46 @@ BigNumber & BigNumber:: operator=( BigNumber && rightNum) noexcept {
     return *this;
 }
 
+BigNumber BigNumber::unsignedMax(const BigNumber &num1, const BigNumber &num2) {
+    if( num1.numOfDigits > num2.numOfDigits){
+        return num1;
+    }
 
+    if( num1.numOfDigits < num2.numOfDigits){
+        return num2;
+    }
 
+    size_t index = num1.numOfDigits - 1;
+    while( (num1[index] == num2[index]) && (index > 0) ){
+        --index;
+    }
+    if( num1[index] >= num2[index]){
+        return num1;
+    }
+    if( num1[index] < num2[index]){
+        return num2;
+    }
+}
+
+BigNumber BigNumber::unsignedMin(const BigNumber &num1, const BigNumber &num2) {
+    if( num1.numOfDigits > num2.numOfDigits){
+        return num2;
+    }
+
+    if( num1.numOfDigits < num2.numOfDigits){
+        return num1;
+    }
+
+    size_t index = num1.numOfDigits - 1;
+    while( (num1[index] == num2[index]) && (index > 0) ){
+        --index;
+    }
+    if( num1[index] >= num2[index]){
+        return num2;
+    }
+    if( num1[index] < num2[index]){
+        return num1;
+    }
+}
 
 
