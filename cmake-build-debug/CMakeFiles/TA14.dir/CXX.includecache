@@ -6,6 +6,14 @@
 
 #IncludeRegexTransform: 
 
+/cygdrive/c/Users/User/CLionProjects/TA14/BigNumber.cpp
+BigNumber.h
+/cygdrive/c/Users/User/CLionProjects/TA14/BigNumber.h
+stdexcept
+-
+iostream
+-
+
 /cygdrive/c/Users/User/CLionProjects/TA14/BigNumber.h
 cstdint
 -
@@ -13,12 +21,4 @@ string
 -
 regex
 -
-
-/cygdrive/c/Users/User/CLionProjects/TA14/main.cpp
-iostream
--
-cstdint
--
-BigNumber.h
-/cygdrive/c/Users/User/CLionProjects/TA14/BigNumber.h
 

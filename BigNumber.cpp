@@ -306,7 +306,8 @@ BigNumber BigNumber:: unsignedAdd( const BigNumber& num1, const BigNumber& num2 
 
     if (carry == 1) {
         sum[i] = 1;
-    } else if (carry == 0) {
+    }
+    else if (carry == 0) {
         //sum[i] = 0;
         sum.numOfDigits -= 1;
     }
@@ -320,7 +321,7 @@ BigNumber BigNumber:: unsignedSubtract( const BigNumber& num1, const BigNumber& 
     int8_t * nArray = new int8_t[bMax.numOfDigits]{};
     size_t i{0};
 
-    for(; i < bMin.numOfDigits; ++i){
+ ;   for(; i < bMin.numOfDigits; ++i){
         if(bMax[i] >= bMin[i]){
             nArray[i] = bMax[i] - bMin[i];
         }
@@ -358,6 +359,21 @@ BigNumber BigNumber:: unsignedSubtract( const BigNumber& num1, const BigNumber& 
     for( size_t i{0}; i < sub.numOfDigits; ++i ){
         sub[i] = nArray[i];
     }
-
     return sub;
+}
+
+BigNumber operator+( const BigNumber & num1, const BigNumber & num2){
+    BigNumber sum;
+    if(num1.sign == num2.sign){   // -5 + 5
+        sum = BigNumber:: unsignedAdd(num1, num2);
+        sum.sign = num1.sign;
+    }
+    else{
+        sum = BigNumber::unsignedSubtract(num1, num2);
+        sum.sign = BigNumber::unsignedMax(num1, num2).sign;
+    }
+    if( sum.numOfDigits == 1 && sum[0] == 0 ){
+        sum.sign = true;
+    }
+    return sum;
 }
