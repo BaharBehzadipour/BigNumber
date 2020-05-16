@@ -267,8 +267,118 @@ bool BigNumber:: operator<( const BigNumber & myBig) const{
     return !(*this >= myBig);
 }
 
+BigNumber BigNumber:: absoluteValue() const{
+    BigNumber temp;
+    temp.sign = true;
+    temp.numOfDigits = numOfDigits;
+    temp.numArray = new int8_t[numOfDigits];
+    for( size_t i{0}; i < numOfDigits; ++i){
+        temp.numArray[i] = numArray[i];
+    }
+    return temp;
+}
+
+BigNumber BigNumber:: unsignedAdd( const BigNumber& num1, const BigNumber& num2 ) {
+    BigNumber bMax = unsignedMax(num1, num2);
+    BigNumber bMin = unsignedMin(num1, num2);
+
+    BigNumber sum;
+
+    sum.sign = true;
+    sum.numOfDigits = bMax.numOfDigits + 1;
+    sum.numArray = new int8_t[sum.numOfDigits];
+    size_t i{0};
+    int8_t carry = 0;
+    int8_t s;
+
+    for (; i < bMin.numOfDigits; ++i) {
+        s = bMax[i] + bMin[i] + carry;
+        sum[i] = s % 10;
+        carry = s / 10;
+    }
+
+    for (; i < bMax.numOfDigits; ++i) {
+        s = bMax[i] + carry;
+        sum[i] = s % 10;
+        carry = s / 10;
+    }
+
+    if (carry == 1) {
+        sum[i] = 1;
+    }
+    else if (carry == 0) {
+        //sum[i] = 0;
+        sum.numOfDigits -= 1;
+    }
+
+    return sum;
+}
+
+BigNumber BigNumber:: unsignedSubtract( const BigNumber& num1, const BigNumber& num2 ){
+    BigNumber bMax = unsignedMax(num1, num2);
+    BigNumber bMin = unsignedMin(num1, num2);
+    int8_t * nArray = new int8_t[bMax.numOfDigits]{};
+    size_t i{0};
+
+ ;   for(; i < bMin.numOfDigits; ++i){
+        if(bMax[i] >= bMin[i]){
+            nArray[i] = bMax[i] - bMin[i];
+        }
+        else if( bMax[i] < bMin[i] && bMax[i+1] != 0 ){
+            nArray[i] = 10 + bMax[i] - bMin[i];
+            bMax[i+1] -= 1;
+        }
+        else if(bMax[i] < bMin[i] && bMax[i+1] == 0){
+            size_t j = i;
+            while( bMax[j+1] == 0 ){
+                bMax[j+1] = 9;
+                ++j;
+            }
+            bMax[j+1] -= 1;
+            nArray[i] = 10 + bMax[i] - bMin[i];
+        }
+    }
+
+    for(; i < bMax.numOfDigits; ++ i){
+        nArray[i] = bMax[i];
+    }
+
+    int numOfZerosOnTheLeft = 0;
+    size_t index{bMax.numOfDigits - 1};
+    while( nArray[index] == 0 && index > 0){
+        ++numOfZerosOnTheLeft;
+        --index;
+    }
+
+    BigNumber sub;
+    sub.sign = true;
+    sub.numOfDigits = bMax.numOfDigits - numOfZerosOnTheLeft;
+    sub.numArray = new int8_t[sub.numOfDigits];
+
+    for( size_t i{0}; i < sub.numOfDigits; ++i ){
+        sub[i] = nArray[i];
+    }
+    return sub;
+}
+
+BigNumber operator+( const BigNumber & num1, const BigNumber & num2){
+    BigNumber sum;
+    if(num1.sign == num2.sign){   // -5 + 5
+        sum = BigNumber:: unsignedAdd(num1, num2);
+        sum.sign = num1.sign;
+    }
+    else{
+        sum = BigNumber::unsignedSubtract(num1, num2);
+        sum.sign = BigNumber::unsignedMax(num1, num2).sign;
+    }
+    if( sum.numOfDigits == 1 && sum[0] == 0 ){
+        sum.sign = true;
+    }
+    return sum;
+}
+
 BigNumber BigNumber:: operator>>( unsigned shift ){
-    if ( shift < numOfDigits ){
+    if ( numOfDigits < shift ){
         throw invalid_argument("Shift must be less than number of digits.");
     }
 
