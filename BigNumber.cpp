@@ -266,3 +266,24 @@ bool BigNumber:: operator>( const BigNumber & myBig) const{
 bool BigNumber:: operator<( const BigNumber & myBig) const{
     return !(*this >= myBig);
 }
+
+BigNumber BigNumber:: operator>>( unsigned shift ){
+    if ( shift < numOfDigits ){
+        throw invalid_argument("Shift must be less than number of digits.");
+    }
+
+    BigNumber temp;
+
+    if( numOfDigits == shift ) {
+        temp = "0";
+    }
+    else{
+        temp.sign = sign;
+        temp.numOfDigits = numOfDigits - shift;
+        temp.numArray = new int8_t[temp.numOfDigits];
+        for( size_t i{0}; i < temp.numOfDigits; ++i){
+            temp[i] = numArray[i + shift];
+        }
+    }
+    return temp;
+}
