@@ -56,6 +56,12 @@ public:
     BigNumber absoluteValue() const;
     BigNumber operator>>( unsigned shift );
 
+    BigNumber& operator ++();
+    BigNumber operator ++(int);
+
+    BigNumber& operator --();
+    BigNumber operator --(int);
+
 };
 
 
