@@ -28,3 +28,23 @@ if(carry==0){
 }
 return  multi;
 }
+
+BigNumber operator << (const BigNumber myBig1, const unsigned shift ) {
+
+    MyBigNumber myBig;
+    myBig.sign = myBig1.getSign();
+    myBig.numOfDigits = myBig1.getNumOfDigits()+shift;
+    myBig.numArray=new int8_t [myBig.numOfDigits];
+    size_t i{0};
+    for(; i <shift; ++i){
+      myBig[i]=0;
+    }
+    size_t j{0};
+    for(;i<myBig.numOfDigits;++i){
+       myBig[i]= myBig1[j];
+       ++j;
+    }
+    return myBig;
+}
+
+
