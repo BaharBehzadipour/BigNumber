@@ -73,5 +73,18 @@ BigNumber operator * (const BigNumber &num1, const BigNumber &num2) {
     return sum;
 }
 
+BigNumber MyBigNumber::power( const BigNumber &  myBig , const unsigned int number ) {
+
+    BigNumber myBig1 = myBig;
+    if(number==0){
+        return 1;
+    }
+    for(size_t i=1;i<number;++i){
+        myBig1=myBig1*myBig;
+    }
+    return myBig1;
+}
+
+
 
 
