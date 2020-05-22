@@ -4,6 +4,11 @@
 CMakeFiles/TA14.dir/BigNumber.cpp.o: ../BigNumber.cpp
 CMakeFiles/TA14.dir/BigNumber.cpp.o: ../BigNumber.h
 
+CMakeFiles/TA14.dir/MyBigNumber.cpp.o: ../BigNumber.h
+CMakeFiles/TA14.dir/MyBigNumber.cpp.o: ../MyBigNumber.cpp
+CMakeFiles/TA14.dir/MyBigNumber.cpp.o: ../MyBigNumber.h
+
 CMakeFiles/TA14.dir/main.cpp.o: ../BigNumber.h
+CMakeFiles/TA14.dir/main.cpp.o: ../MyBigNumber.h
 CMakeFiles/TA14.dir/main.cpp.o: ../main.cpp
 

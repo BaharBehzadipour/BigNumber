@@ -7,7 +7,9 @@
 #include "BigNumber.h"
 
 
-class MyBigNumber : public BigNumber{
+class MyBigNumber : public BigNumber    {
+public:
+        static  BigNumber multByOneDigit ( const BigNumber& myBig , const int8_t&   number );
 
 };
 
