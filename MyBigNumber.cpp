@@ -3,9 +3,13 @@
 //
 
 #include "MyBigNumber.h"
+#include <cmath>
+#include <stdexcept>
+
+using namespace  std;
 
 BigNumber MyBigNumber::multByOneDigit(  const BigNumber& myBig , const int8_t& number ) {
-
+if(number >=0 && number<=9){
     MyBigNumber multi;
 
     multi.sign = true;
@@ -26,7 +30,10 @@ if(carry==0){
 }else{
     multi[i]=carry;
 }
-return  multi;
+return  multi;}
+else{
+    throw invalid_argument("A number is out of range");
+}
 }
 
 BigNumber operator << (const BigNumber myBig1, const unsigned shift ) {
@@ -46,5 +53,25 @@ BigNumber operator << (const BigNumber myBig1, const unsigned shift ) {
     }
     return myBig;
 }
+
+BigNumber operator * (const BigNumber &num1, const BigNumber &num2) {
+
+  const  BigNumber max=BigNumber::unsignedMax(num1,num2);
+  const  BigNumber min=BigNumber::unsignedMin(num1,num2);
+    size_t i{0};
+    BigNumber sum = "0";
+
+    for(; i<min.getNumOfDigits();++i){
+        sum = sum + ((MyBigNumber::multByOneDigit(max,min[i]))<<i);
+    }
+    if(num1.getSign()==num2.getSign()){
+        sum.setSign(true);
+    }else {
+        sum.setSign(false);
+    }
+
+    return sum;
+}
+
 
 

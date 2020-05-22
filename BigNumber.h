@@ -20,7 +20,7 @@ protected:
     bool validate( const std::string & str, const std::string & pattern);
     unsigned numOfTrimCharsOnLeft( const std::string & str );
     BigNumber(){}
-    int8_t& operator[](size_t index);
+
 
 
     //max(a, b)    a.max(b)
@@ -35,7 +35,7 @@ public:
     static BigNumber unsignedSubtract( const BigNumber& num1, const BigNumber& num2 );
 
 
-
+    int8_t& operator[](size_t index);
     // end of private list
 
 
@@ -47,6 +47,7 @@ public:
     BigNumber ( BigNumber && myBig ) noexcept;  // move constructor
     ~BigNumber();
     void setValues( const std::string & str );
+    void setSign (bool b );
     bool getSign() const;
     unsigned int getNumOfDigits() const;
     BigNumber & operator=(const BigNumber & rightNum);

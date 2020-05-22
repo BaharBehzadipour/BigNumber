@@ -446,4 +446,8 @@ BigNumber BigNumber::operator--(int) {
     return temp;
 }
 
+void BigNumber::setSign(bool b) {
+sign=b;
+}
+
 

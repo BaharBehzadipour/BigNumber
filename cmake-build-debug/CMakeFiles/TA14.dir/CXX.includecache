@@ -17,6 +17,10 @@ regex
 /cygdrive/c/Users/pars/CLionProjects/BigNumber/MyBigNumber.cpp
 MyBigNumber.h
 /cygdrive/c/Users/pars/CLionProjects/BigNumber/MyBigNumber.h
+cmath
+-
+stdexcept
+-
 
 /cygdrive/c/Users/pars/CLionProjects/BigNumber/MyBigNumber.h
 BigNumber.h
