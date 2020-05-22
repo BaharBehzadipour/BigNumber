@@ -1,1 +1,1 @@
-/usr/bin/c++.exe -g  -Wl,--enable-auto-import CMakeFiles/TA14.dir/main.cpp.o CMakeFiles/TA14.dir/BigNumber.cpp.o  -o TA14.exe -Wl,--out-implib,libTA14.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
+/usr/bin/c++.exe -g  -Wl,--enable-auto-import CMakeFiles/TA14.dir/main.cpp.o CMakeFiles/TA14.dir/BigNumber.cpp.o CMakeFiles/TA14.dir/MyBigNumber.cpp.o  -o TA14.exe -Wl,--out-implib,libTA14.dll.a -Wl,--major-image-version,0,--minor-image-version,0 

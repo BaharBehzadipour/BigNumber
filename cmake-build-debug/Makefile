@@ -150,6 +150,33 @@ BigNumber.cpp.s:
 	$(MAKE) -f CMakeFiles/TA14.dir/build.make CMakeFiles/TA14.dir/BigNumber.cpp.s
 .PHONY : BigNumber.cpp.s
 
+MyBigNumber.o: MyBigNumber.cpp.o
+
+.PHONY : MyBigNumber.o
+
+# target to build an object file
+MyBigNumber.cpp.o:
+	$(MAKE) -f CMakeFiles/TA14.dir/build.make CMakeFiles/TA14.dir/MyBigNumber.cpp.o
+.PHONY : MyBigNumber.cpp.o
+
+MyBigNumber.i: MyBigNumber.cpp.i
+
+.PHONY : MyBigNumber.i
+
+# target to preprocess a source file
+MyBigNumber.cpp.i:
+	$(MAKE) -f CMakeFiles/TA14.dir/build.make CMakeFiles/TA14.dir/MyBigNumber.cpp.i
+.PHONY : MyBigNumber.cpp.i
+
+MyBigNumber.s: MyBigNumber.cpp.s
+
+.PHONY : MyBigNumber.s
+
+# target to generate assembly for a file
+MyBigNumber.cpp.s:
+	$(MAKE) -f CMakeFiles/TA14.dir/build.make CMakeFiles/TA14.dir/MyBigNumber.cpp.s
+.PHONY : MyBigNumber.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -189,6 +216,9 @@ help:
 	@echo "... BigNumber.o"
 	@echo "... BigNumber.i"
 	@echo "... BigNumber.s"
+	@echo "... MyBigNumber.o"
+	@echo "... MyBigNumber.i"
+	@echo "... MyBigNumber.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

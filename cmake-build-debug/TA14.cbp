@@ -86,6 +86,12 @@
 		<Unit filename="/cygdrive/c/Users/pars/CLionProjects/BigNumber/BigNumber.h">
 			<Option target="TA14"/>
 		</Unit>
+		<Unit filename="/cygdrive/c/Users/pars/CLionProjects/BigNumber/MyBigNumber.cpp">
+			<Option target="TA14"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/pars/CLionProjects/BigNumber/MyBigNumber.h">
+			<Option target="TA14"/>
+		</Unit>
 		<Unit filename="/cygdrive/c/Users/pars/CLionProjects/BigNumber/main.cpp">
 			<Option target="TA14"/>
 		</Unit>
