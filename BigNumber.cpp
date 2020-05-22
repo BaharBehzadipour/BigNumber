@@ -397,3 +397,31 @@ BigNumber BigNumber:: operator>>( unsigned shift ){
     }
     return temp;
 }
+
+BigNumber operator-(const BigNumber &num1, const BigNumber &num2) {
+    BigNumber sub;
+
+    if(num1[0]==0){
+        sub = num2;
+        sub.sign = !(num2.sign);
+
+    }else if(num1.sign == num2.sign){
+        sub = BigNumber::unsignedSubtract(num1, num2);
+
+        if(BigNumber::unsignedMax(num1, num2)==num1){
+            sub.sign = num1.sign;}
+
+        if(BigNumber::unsignedMax(num1, num2)==num2){
+            sub.sign = !( num2.sign );}
+
+    }else {
+        sub = BigNumber:: unsignedAdd(num1, num2);
+        sub.sign = num1.sign;
+    }
+    if(sub.numOfDigits == 1 && sub[0] == 0 ){
+        sub.sign = true;
+    }
+    return sub;
+}
+
+
