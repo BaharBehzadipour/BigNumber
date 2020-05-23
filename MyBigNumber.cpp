@@ -85,6 +85,19 @@ BigNumber MyBigNumber::power( const BigNumber &  myBig , const unsigned int numb
     return myBig1;
 }
 
+BigNumber MyBigNumber::operator()(unsigned int a , unsigned int b) {
+    MyBigNumber temp;
+    temp.sign = true ;
+    temp.numOfDigits = b;
+    temp.numArray = new int8_t [temp.numOfDigits];
+    unsigned int i =(a-b)+1;
+    for( int j=0;j< b;++j){
+        temp[j]=numArray[i];
+        ++i;
+    }
+return temp;
+}
+
 
 
 
