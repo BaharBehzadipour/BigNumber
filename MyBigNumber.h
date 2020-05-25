@@ -30,6 +30,7 @@ public:
     static BigNumber power( const BigNumber & myBig , const unsigned int number );
     BigNumber operator () (unsigned  int a , unsigned  int b);
     friend  BigNumber operator / (const BigNumber &num1, const BigNumber &num2);
+    friend  BigNumber operator % (const BigNumber &num1, const BigNumber &num2);
 };
 
 
