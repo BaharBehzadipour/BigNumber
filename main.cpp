@@ -12,7 +12,7 @@ int main() {
     BigNumber myBigNumber2 =-255555485566; // call constructor
     BigNumber myBigNumber3 ="25852"; // call constructor
     MyBigNumber  myBigNum1 = "-12155555555555555555"; // call constructor
-    MyBigNumber  myBigNum2 = 654; // call constructor
+    MyBigNumber  myBigNum2 = 6545454; // call constructor
     MyBigNumber  myBigNum3 = "258955"; // call constructor
     cout<<"first BigNumber : "<<myBigNumber1<<endl<<"second BigNumber : "<<myBigNumber2<<endl; //call operator << for BigNumber
     cout<<"Enter a BigNumber : "<<endl;
