@@ -69,6 +69,8 @@ public:
     BigNumber& operator --();
     BigNumber operator --(int);
 
+    std::string toString()const;
+
 };
 
 

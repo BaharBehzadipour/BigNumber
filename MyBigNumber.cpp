@@ -5,6 +5,7 @@
 #include "MyBigNumber.h"
 #include <cmath>
 #include <stdexcept>
+#include <sstream>
 
 using namespace  std;
 
@@ -97,6 +98,126 @@ BigNumber MyBigNumber::operator()(unsigned int a , unsigned int b) {
     }
 return temp;
 }
+
+
+
+BigNumber operator/(const BigNumber &num1 , const BigNumber &num2) {
+    if(num2=="0"){
+        throw invalid_argument("second number cant be zero");
+    }
+    
+   if(num1==num2){
+       return 1;
+   }else if(BigNumber::unsignedMax(num1,num2)==num2){
+       return "0";
+   }else {
+       MyBigNumber temp ;
+       temp.numOfDigits=num2.getNumOfDigits()+1;
+       temp.numArray=new int8_t [ temp.numOfDigits];
+
+       MyBigNumber temp2=num1;
+       MyBigNumber temp3=num1;
+       int carry=0;
+       temp2=temp2(num1.getNumOfDigits()-1,num2.getNumOfDigits());
+
+        if(temp2 < num2){
+            temp2=temp3(num1.getNumOfDigits()-1,num2.getNumOfDigits()+1);
+            if(((temp2[temp2.getNumOfDigits() - 1]*10+temp2[temp2.getNumOfDigits() - 2] )/ num2[num2.getNumOfDigits()-1])*num2>temp2){
+                carry= ((temp2[temp2.getNumOfDigits() - 1]*10+temp2[temp2.getNumOfDigits() - 2] )/ num2[num2.getNumOfDigits()-1])-1;
+            }else {
+                carry = (temp2[temp2.getNumOfDigits() - 1] * 10 + temp2[temp2.getNumOfDigits() - 2]) /
+                        num2[num2.getNumOfDigits() - 1];
+            }
+        } else {
+            if((temp2[temp2.getNumOfDigits() - 1] / num2[num2.getNumOfDigits()-1])*num2 > temp2){
+           carry= temp2[temp2.getNumOfDigits() - 1] / num2[num2.getNumOfDigits()-1] -1;
+            } else {carry= temp2[temp2.getNumOfDigits() - 1] / num2[num2.getNumOfDigits()-1];}
+        }
+        for (int i=0;i<num1.getNumOfDigits()-temp2.getNumOfDigits();++i){
+            temp2=((temp2-carry*num2)<<1)+temp3[num1.getNumOfDigits()-temp2.getNumOfDigits()-1];
+            carry=carry*10;
+        }
+   }
+
+}
+
+MyBigNumber::MyBigNumber(BigNumber myBig) {
+sign=myBig.getSign();
+numOfDigits=myBig.getNumOfDigits();
+numArray=new int8_t [numOfDigits];
+
+for(int i=0;i<numOfDigits;++i){
+    numArray[i]=myBig[i];
+}
+}
+
+MyBigNumber::~MyBigNumber() {
+delete [] numArray;
+}
+
+MyBigNumber::MyBigNumber(const string &str) : BigNumber(str) {
+
+}
+
+MyBigNumber::MyBigNumber(const char *myCharArray) : BigNumber(myCharArray) {
+
+}
+
+MyBigNumber::MyBigNumber(const long &intNum) : BigNumber(intNum) {
+
+}
+
+MyBigNumber &MyBigNumber::operator=(const MyBigNumber &myBigNumber) {
+    if(&myBigNumber!=this){
+    sign=myBigNumber.sign;
+    numOfDigits=myBigNumber.numOfDigits;
+    delete [] numArray;
+    numArray=new int8_t [numOfDigits];
+    for(int i=0;i<numOfDigits;++i){
+        numArray[i]=myBigNumber[i];
+    }}
+    return *this;
+}
+
+std::string MyBigNumber::toString() const {
+    ostringstream  output;
+    output<<"i am a MyBigNumber object"<<endl;
+    output<<BigNumber::toString();
+    return output.str();
+}
+
+std::string MyBigNumber::toString(int num) {
+    ostringstream output;
+    for(int i=1;i<=numOfDigits;++i){
+
+        output<<"hello"<<endl;
+
+    }
+    output<<BigNumber::toString();
+    return output.str();
+}
+
+MyBigNumber::MyBigNumber(const MyBigNumber &myBigNumber) {
+
+}
+
+MyBigNumber::MyBigNumber(MyBigNumber &&myBigNumber) noexcept {
+
+}
+
+MyBigNumber &MyBigNumber::operator=(MyBigNumber &&myBigNumber) noexcept {
+    if(&myBigNumber!=this){
+        sign=myBigNumber.sign;
+        numOfDigits=myBigNumber.numOfDigits;
+        delete [] numArray;
+        numArray=new int8_t [numOfDigits];
+        for(int i=0;i<numOfDigits;++i){
+            numArray[i]=myBigNumber[i];
+        }}
+    return *this;
+}
+
+
 
 
 

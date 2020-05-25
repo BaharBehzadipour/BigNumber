@@ -450,4 +450,16 @@ void BigNumber::setSign(bool b) {
 sign=b;
 }
 
+std::string BigNumber::toString()const {
+    ostringstream output;
+    if(!sign){output<<'-';
+    }
+    for(int i{(int)(numOfDigits-1)};i>=0;--i){
+
+        output<<(int8_t)(numArray[i]+48);
+
+    }
+    return output.str();
+}
+
 

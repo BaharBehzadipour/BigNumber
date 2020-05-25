@@ -8,22 +8,28 @@ using namespace std;
 
 int main() {
 
-    BigNumber b="-155";
-    BigNumber c=55;
+   // BigNumber b="-155";
+  //  BigNumber c=55;
+
+
+   // cout<<MyBigNumber::multByOneDigit(b,2)<<endl;
+ //   cout<<(b>>2)<<endl;
+  //  cout<<(a<<0)<<endl;
+
+   // cout<<(a*x)<<endl;
+
+    //cout<<MyBigNumber::power(b,5)<<endl;
+
+   // cout<<x(4,3)<<endl;
+
+
     MyBigNumber a;
-    a.setValues("-0012");
+    a.setValues("1569856");
     MyBigNumber x;
-    x.setValues("158462");
+    x.setValues("142");
 
-    cout<<MyBigNumber::multByOneDigit(b,2)<<endl;
-    cout<<(b>>2)<<endl;
-    cout<<(a<<0)<<endl;
+   cout<<"hii"<<endl;
 
-    cout<<(a*x)<<endl;
-
-    cout<<MyBigNumber::power(b,5)<<endl;
-
-    cout<<x(4,3)<<endl;
-
+    cout<<(a/x)<<endl;
 return 0;
 }
