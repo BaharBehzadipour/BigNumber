@@ -125,6 +125,7 @@ BigNumber BigNumber:: operator-() const{
 
 int8_t & BigNumber::operator[](size_t index){
     if( index < 0 || index >= numOfDigits){
+
         throw out_of_range("The index is out of range.");
     }
     return numArray[index];
@@ -379,7 +380,7 @@ BigNumber operator+( const BigNumber & num1, const BigNumber & num2){
 
 BigNumber BigNumber:: operator>>( unsigned shift ){
     if ( numOfDigits < shift ){
-        throw invalid_argument("Shift must be less than number of digits.");
+        throw out_of_range("Shift must be less than number of digits.");
     }
 
     BigNumber temp;

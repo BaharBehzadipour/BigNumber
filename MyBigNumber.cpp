@@ -185,7 +185,7 @@ BigNumber operator / ( const BigNumber & num1, const BigNumber & num2){
     }
 
     if(num2 == "0"){
-        throw invalid_argument("!!! second number can't be zero !!!");
+        throw out_of_range("!!! second number can't be zero !!!");
     }
 
     if(num1 == num2){
