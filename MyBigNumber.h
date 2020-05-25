@@ -23,7 +23,6 @@ public:
 
     std::string toString()const;
     std::string toString(int num);
-    ~MyBigNumber();
 
     static  BigNumber multByOneDigit ( const BigNumber& myBig , const int8_t&   number );
     friend BigNumber operator << ( const  BigNumber myBig1 , const unsigned shift ); // ba mybig ahhhh

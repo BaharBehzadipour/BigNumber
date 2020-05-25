@@ -99,48 +99,6 @@ BigNumber MyBigNumber::operator()(unsigned int a , unsigned int b) {
 return temp;
 }
 
-
-
-BigNumber operator/(const BigNumber &num1 , const BigNumber &num2) {
-    if(num2=="0"){
-        throw invalid_argument("second number cant be zero");
-    }
-    
-   if(num1==num2){
-       return 1;
-   }else if(BigNumber::unsignedMax(num1,num2)==num2){
-       return "0";
-   }else {
-       MyBigNumber temp ;
-       temp.numOfDigits=num2.getNumOfDigits()+1;
-       temp.numArray=new int8_t [ temp.numOfDigits];
-
-       MyBigNumber temp2=num1;
-       MyBigNumber temp3=num1;
-       int carry=0;
-       temp2=temp2(num1.getNumOfDigits()-1,num2.getNumOfDigits());
-
-        if(temp2 < num2){
-            temp2=temp3(num1.getNumOfDigits()-1,num2.getNumOfDigits()+1);
-            if(((temp2[temp2.getNumOfDigits() - 1]*10+temp2[temp2.getNumOfDigits() - 2] )/ num2[num2.getNumOfDigits()-1])*num2>temp2){
-                carry= ((temp2[temp2.getNumOfDigits() - 1]*10+temp2[temp2.getNumOfDigits() - 2] )/ num2[num2.getNumOfDigits()-1])-1;
-            }else {
-                carry = (temp2[temp2.getNumOfDigits() - 1] * 10 + temp2[temp2.getNumOfDigits() - 2]) /
-                        num2[num2.getNumOfDigits() - 1];
-            }
-        } else {
-            if((temp2[temp2.getNumOfDigits() - 1] / num2[num2.getNumOfDigits()-1])*num2 > temp2){
-           carry= temp2[temp2.getNumOfDigits() - 1] / num2[num2.getNumOfDigits()-1] -1;
-            } else {carry= temp2[temp2.getNumOfDigits() - 1] / num2[num2.getNumOfDigits()-1];}
-        }
-        for (int i=0;i<num1.getNumOfDigits()-temp2.getNumOfDigits();++i){
-            temp2=((temp2-carry*num2)<<1)+temp3[num1.getNumOfDigits()-temp2.getNumOfDigits()-1];
-            carry=carry*10;
-        }
-   }
-
-}
-
 MyBigNumber::MyBigNumber(BigNumber myBig) {
 sign=myBig.getSign();
 numOfDigits=myBig.getNumOfDigits();
@@ -151,9 +109,6 @@ for(int i=0;i<numOfDigits;++i){
 }
 }
 
-MyBigNumber::~MyBigNumber() {
-delete [] numArray;
-}
 
 MyBigNumber::MyBigNumber(const string &str) : BigNumber(str) {
 
@@ -218,7 +173,84 @@ MyBigNumber &MyBigNumber::operator=(MyBigNumber &&myBigNumber) noexcept {
 }
 
 
+BigNumber operator / ( const BigNumber & num1, const BigNumber & num2){
 
+    MyBigNumber result;
+    MyBigNumber DivideRemain;
+
+    if (num1.getSign() == num2.getSign()) {
+        result.sign = true;
+    } else {
+        result.sign = false;
+    }
+
+    if(num2 == "0"){
+        throw invalid_argument("!!! second number can't be zero !!!");
+    }
+
+    if(num1 == num2){
+        return 1;
+    }
+    if(num1 == BigNumber::unsignedMin(num1, num2)){
+        return "0";
+    }
+    else {
+        unsigned digit1 = num1.getNumOfDigits();
+        unsigned digit2 = num2.getNumOfDigits();
+        MyBigNumber temp = num1;
+
+        MyBigNumber temp2 = temp(digit1 - 1, digit2);
+
+        if (temp2 < num2) {
+            temp2 = temp(digit1 - 1, digit2 + 1);
+        }
+        unsigned digit3 = temp2.getNumOfDigits();
+        unsigned digit4 = temp2.getNumOfDigits();
+
+
+
+        if (temp2.getNumOfDigits() == num2.getNumOfDigits()) {
+            result.numOfDigits = num1.getNumOfDigits() - num2.getNumOfDigits() + 1;
+        } else {
+            result.numOfDigits = num1.getNumOfDigits() - num2.getNumOfDigits();
+        }
+        result.numArray = new int8_t[result.numOfDigits];
+        int j=1;
+        for (int i = result.getNumOfDigits() - 1 ; i >= 0  ; --i) {
+            if(temp2.getNumOfDigits() == num2.getNumOfDigits()){
+                if(temp2 < num2){
+                    result[i] = 0;
+                }else {
+                    result[i] = temp2[digit3 - 1] / num2[digit2 - 1];
+                    if(temp2 < result[i] * num2){
+                        result[i] = result[i] - 1;
+                    }
+                }
+            } else{
+                if(temp2 < num2){
+                    result[i] = 0;
+                }else {
+                    result[i] = ((temp2[digit3 - 1] * 10) + temp2[digit3 - 2] ) / num2[digit2 - 1];
+                    if(temp2 < result[i] * num2){
+                        result[i] = result[i] - 1;
+                    }
+                }
+            }
+            DivideRemain = BigNumber::unsignedSubtract( temp2,(result[i] * num2));
+            if(i>0) {
+                temp2 = DivideRemain;
+                temp2 = (temp2 << 1);
+                temp2[0] = num1[digit1 - digit4 - j];
+                digit3 = temp2.numOfDigits;
+                j++;
+            }
+        }
+
+
+
+        return result;
+    }
+}
 
 
 

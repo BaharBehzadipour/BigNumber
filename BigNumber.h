@@ -16,10 +16,14 @@ protected:
     bool sign;
     int8_t * numArray = nullptr;
     unsigned numOfDigits;
-
     bool validate( const std::string & str, const std::string & pattern);
     unsigned numOfTrimCharsOnLeft( const std::string & str );
     BigNumber(){}
+
+    static bool unsignedGreaterOrEqual( const BigNumber& num1, const BigNumber& num2);
+    static bool unsignedLessOrEqual( const BigNumber& num1, const BigNumber& num2);
+    static BigNumber unsignedAdd( const BigNumber& num1, const BigNumber& num2 );
+
 
 
 
@@ -27,14 +31,10 @@ protected:
 
 public:
     //must be private
+
     static BigNumber unsignedMax( const BigNumber& num1, const BigNumber& num2);
     static BigNumber unsignedMin( const BigNumber& num1, const BigNumber& num2);
-    static bool unsignedGreaterOrEqual( const BigNumber& num1, const BigNumber& num2);
-    static bool unsignedLessOrEqual( const BigNumber& num1, const BigNumber& num2);
-    static BigNumber unsignedAdd( const BigNumber& num1, const BigNumber& num2 );
     static BigNumber unsignedSubtract( const BigNumber& num1, const BigNumber& num2 );
-
-
     int8_t& operator[](size_t index);
     // end of private list
 
@@ -46,6 +46,7 @@ public:
     BigNumber ( const BigNumber & myBig );   // copy constructor
     BigNumber ( BigNumber && myBig ) noexcept;  // move constructor
     ~BigNumber();
+
     void setValues( const std::string & str );
     void setSign (bool b );
     bool getSign() const;
