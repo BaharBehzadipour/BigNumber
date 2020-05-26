@@ -68,7 +68,8 @@ int main() {
         cout << "myBigNum1%myBigNum2 = " << (myBigNum1 % myBigNum2) << endl; //call operator % for BigNumber
         cout << "myBigNum2(5,2) : " << myBigNum2(4, 2) << endl; //call operator () for BigNumber
     } catch (out_of_range e) {
+
               cout<<e.what()<<endl;
     }
-return 0;
+      return 0;
 }
